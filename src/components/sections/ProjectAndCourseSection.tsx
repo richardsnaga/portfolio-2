@@ -3,27 +3,27 @@ import React from 'react';
 import SectionContainer from '../utils/SectionContainer';
 import TitleSectionPageContainer from '../utils/TitleSectionPageContainer';
 import { Card, CardBody, CardFooter, Image } from '@heroui/react';
+import { projects } from '@/src/data/projectDetails';
+import { useRouter } from 'next/navigation';
 
 const ProjectAndCourseSection = () => {
-  const list = [
-    {
-      title: 'E-Procurement',
-      img: '/projects/polytama/polytama.png',
-      subtitle: 'Website E-Procurement for PT.Polytama Propindo'
-    }
-  ];
+  const router = useRouter();
+  const projectDetails = (item: any) => {
+    console.log('item pressed', item);
+    router.push(`/projects/${item.id}`);
+  };
   return (
     <SectionContainer>
       <div className="w-full flex flex-col gap-6">
         <TitleSectionPageContainer title="Project" />
         <div className="gap-3 grid grid-cols-2 sm:grid-cols-4">
-          {list.map((item, index) => (
+          {projects.map((item) => (
             /* eslint-disable no-console */
             <Card
-              key={index}
+              key={item.id}
               isPressable
               shadow="sm"
-              onPress={() => console.log('item pressed')}
+              onPress={() => projectDetails(item)}
             >
               <CardBody className="overflow-visible p-0">
                 <Image
